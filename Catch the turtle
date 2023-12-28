@@ -1,0 +1,98 @@
+import timeit
+import turtle
+import random
+import time
+
+
+score=0
+
+
+
+
+
+
+screen=turtle.Screen()
+screen.screensize(800,800)
+screen.bgcolor("white")
+screen.title("Catch The Turtle")
+FONT=("Arial",30,"normal")
+#score_turtle
+score_turtle=turtle.Turtle()
+#countdown_turtle
+countdown_turtle=turtle.Turtle()
+countdown_turtle.hideturtle()
+countdown_turtle.penup()
+top_height = screen.window_height() / 2
+y = top_height * 0.8
+countdown_turtle.teleport(0, y-40)
+countdown_turtle.color("black")
+
+
+
+#target_circle
+target=turtle.Turtle()
+target.shape("circle")
+target.color("black")
+target.shapesize(3)
+
+def setup_score_turtle():
+    score_turtle.hideturtle()
+    score_turtle.penup()
+    top_height=screen.window_height()/2
+    y=top_height*0.8
+    score_turtle.teleport(0,y)
+    score_turtle.color("dark blue")
+    score_turtle.write("Score: 0",move=False, align="center", font=FONT)
+
+def random_target():
+    def handle_click(x,y):
+        global score
+        score +=1
+        score_turtle.clear()
+        score_turtle.write("Score: {}".format(score), move=False, align="center", font=FONT)
+
+        #print(x,y)
+    target.onclick(handle_click)
+    sure =int(input("Enter Time: "))
+
+
+
+
+
+
+    while sure !=0:
+        x=random.randint(-400,400)
+        y=random.randint(-400,400)
+        target.teleport(x,y)
+        countdown_turtle.write("Time :{}".format(sure), align="center", font=FONT)
+        time.sleep(.7)
+        sure -= 1
+
+
+
+        countdown_turtle.clear()
+
+
+        print(sure)
+
+
+    else:
+        screen.clear()
+        countdown_turtle.write("GAME OVER", align="center", font=FONT)
+        score_turtle.write("Score :{}".format(score), align="center", font=FONT)
+        top_height = screen.window_height() / 2
+        y = top_height * 0.8
+        countdown_turtle.teleport(0, y -80)
+        countdown_turtle.color("black")
+
+
+
+
+setup_score_turtle()
+random_target()
+
+
+
+
+
+turtle.mainloop()
